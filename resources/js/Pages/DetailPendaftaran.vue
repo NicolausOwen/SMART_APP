@@ -4,6 +4,8 @@ import { computed } from 'vue';
 import { usePage, useForm } from '@inertiajs/vue3';
 import html2pdf from 'html2pdf.js';
 
+import logo from '@@/assets/picture/Logo.png';
+
 // Fetch the authenticated user's information
 const page = usePage();
 const user = computed(() => page.props.auth.user);
@@ -91,11 +93,11 @@ const printPDF = () => {
 </script>
 
 <template>
-  <div>
+  <div class="mt-[6%] m-5">
     <!-- Registration Details Section -->
     <div id="registration-details"
       class="p-6 bg-white border border-gray-300 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-      <img src="../assets/img/logo.png" style="float: left; height: 60px" alt="Logo" />
+      <img :src="logo" style="float: left; height: 60px" alt="Logo" />
       <div style="margin-left: 20px">
         <div style="font-size: 18px">Data Pendaftaran Siswa Baru | Tahun 2024</div>
         <div style="font-size: 20px">SMA UNSRI</div>

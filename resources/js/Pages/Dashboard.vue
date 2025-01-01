@@ -83,15 +83,17 @@ const submitForm = () => {
                     <label class="text-lg font-semibold mb-4">Panduan Sekarang:</label>
 
                     <!-- Tampilkan panduan saat ini -->
-                    <div v-if="props.guidebook === null" class="mb-4 text-gray-500">Panduan saat ini tidak tersedia.</div>
-                    <div v-else class="mb-4 w-full">
-                        <a :href="guidebook" class="mt-2 text-blue-500 underline"
-                            download>Download Panduan Saat Ini</a>
+                    <div v-if="props.guidebook === null" class="mb-4 text-gray-500">Panduan saat ini tidak tersedia.
                     </div>
-                    
-                    <form @submit.prevent="submitForm" enctype="multipart/form-data"> 
+                    <div v-else class="lg:ml-[57%] mb-4 w-full">
+                        <a :href="guidebook" class="mt-2 text-blue-500 underline" download>Download Panduan
+                            Saat Ini</a>
+                    </div>
+
+                    <form @submit.prevent="submitForm" enctype="multipart/form-data">
                         <div class="input-group mt-4 w-full">
-                            <label for="panduan" class="block text-sm font-medium text-gray-700">Ganti Panduan baru:</label>
+                            <label for="panduan" class="block text-sm font-medium text-gray-700">Ganti Panduan
+                                baru:</label>
                             <input type="file" ref="guidebook" id="panduan" @change="handleFile"
                                 class="mt-2 p-2 border rounded w-full">
                             <button type="submit" class="mt-2 p-2 bg-blue-500 text-white rounded">Upload
@@ -112,7 +114,7 @@ const submitForm = () => {
                 </Link>
             </div>
             <div class="flex items-center justify-center h-24 rounded bg-blue-500 dark:bg-gray-800">
-                <Link href="#" class="text-2xl text-white dark:text-gray-500">
+                <Link :href="route('cetak')" class="text-2xl text-white dark:text-gray-500">
                 Cetak Bukti
                 </Link>
             </div>
@@ -123,7 +125,7 @@ const submitForm = () => {
             </div> -->
             <div class="flex items-center justify-center h-24 rounded bg-teal-500 dark:bg-gray-800">
                 <a :href="guidebook" download class="text-2xl text-white dark:text-gray-500">
-                Download Panduan
+                    Download Panduan
                 </a>
             </div>
         </div>

@@ -16,7 +16,8 @@ use App\Http\Controllers\Controller;
 
 class DashboardController extends Controller
 {
-    public function index() {
+    public function index()
+    {
         if (Auth::check()) {
 
             $user = Auth::user();
@@ -24,42 +25,43 @@ class DashboardController extends Controller
             $guidebookData = guidebook::first();
             // $prestasiId = $studentData->prestasi_id;
             // $prestasiData = Prestasi::where('id', $prestasiId)->first(); 
-            
-            if ($guidebookData) {
-            $guidebookPath = asset('storage/'.$guidebookData->guidebook);
-            };
 
-            if($studentData) {
+            if ($guidebookData) {
+                $guidebookPath = asset('storage/' . $guidebookData->guidebook);
+            }
+            ;
+
+            if ($studentData) {
 
                 $guidebookData = guidebook::first();
                 $prestasiId = $studentData->prestasi_id;
                 $prestasiData = Prestasi::where('id', $prestasiId)->first();
 
-                if ($prestasiData) {               
-                    $sertifikat = asset('storage/'.$prestasiData->sertifikat);  
+                if ($prestasiData) {
+                    $sertifikat = asset('storage/' . $prestasiData->sertifikat);
                 } else {
                     $sertifikat = null;
                 }
 
                 if ($prestasiData) {
                     return Inertia::render("Dashboard", [
-                    'user_id' => $user->id,
-                    'name' => $studentData->name,
-                    'birthplace' => $studentData->birthplace,
-                    'birthdate' => $studentData->birthdate,
-                    'address' => $studentData->address,
-                    'phone' => $studentData->phone,
-                    'email' => $studentData->email,
-                    'parent' => $studentData->parent,
-                    'parentjob' => $studentData->parentjob,
-                    'quran' => $studentData->quran,
-                    'pendapatan' => $studentData->pendapatan,
-                    'jenisPrestasi' => $prestasiData->jenisPrestasi,
-                    'namaPrestasi' => $prestasiData->namaPrestasi,
-                    'tingkatPrestasi' => $prestasiData->tingkatPrestasi,
-                    'penyelenggara' => $prestasiData->penyelenggara,
-                    'sertifikat' => $sertifikat,
-                    'guidebook' => $guidebookPath ?? null,
+                        'user_id' => $user->id,
+                        'name' => $studentData->name,
+                        'birthplace' => $studentData->birthplace,
+                        'birthdate' => $studentData->birthdate,
+                        'address' => $studentData->address,
+                        'phone' => $studentData->phone,
+                        'email' => $studentData->email,
+                        'parent' => $studentData->parent,
+                        'parentjob' => $studentData->parentjob,
+                        'quran' => $studentData->quran,
+                        'pendapatan' => $studentData->pendapatan,
+                        'jenisPrestasi' => $prestasiData->jenisPrestasi,
+                        'namaPrestasi' => $prestasiData->namaPrestasi,
+                        'tingkatPrestasi' => $prestasiData->tingkatPrestasi,
+                        'penyelenggara' => $prestasiData->penyelenggara,
+                        'sertifikat' => $sertifikat,
+                        'guidebook' => $guidebookPath ?? null,
                     ]);
                 }
 
@@ -91,7 +93,8 @@ class DashboardController extends Controller
         return redirect('/')->with('failed', "daftar dulu yaa");
     }
 
-    public function pengumuman() {
+    public function pengumuman()
+    {
         if (Auth::check()) {
             $user = Auth::user();
             $studentData = Student::where('user_id', $user->id)->first();
@@ -109,11 +112,88 @@ class DashboardController extends Controller
                 ]);
             }
         } else {
-            return redirect('/')->with('failed', "Error Hubungi Admin"); 
+            return redirect('/')->with('failed', "Error Hubungi Admin");
         }
     }
 
-    public function jadwal() {
+    public function jadwal()
+    {
         return Inertia::render("Jadwal");
     }
+
+    public function detail_cetak()
+    {
+        if (Auth::check()) {
+
+            $user = Auth::user();
+            $studentData = Student::where('user_id', $user->id)->first();
+            $guidebookData = guidebook::first();
+
+            if ($guidebookData) {
+                $guidebookPath = asset('storage/' . $guidebookData->guidebook);
+            }
+            ;
+
+            if ($studentData) {
+
+                $guidebookData = guidebook::first();
+                $prestasiId = $studentData->prestasi_id;
+                $prestasiData = Prestasi::where('id', $prestasiId)->first();
+
+                if ($prestasiData) {
+                    $sertifikat = asset('storage/' . $prestasiData->sertifikat);
+                } else {
+                    $sertifikat = null;
+                }
+
+                if ($prestasiData) {
+                    return Inertia::render("DetailPendaftaran", [
+                        'user_id' => $user->id,
+                        'name' => $studentData->name,
+                        'birthplace' => $studentData->birthplace,
+                        'birthdate' => $studentData->birthdate,
+                        'address' => $studentData->address,
+                        'phone' => $studentData->phone,
+                        'email' => $studentData->email,
+                        'parent' => $studentData->parent,
+                        'parentjob' => $studentData->parentjob,
+                        'quran' => $studentData->quran,
+                        'pendapatan' => $studentData->pendapatan,
+                        'jenisPrestasi' => $prestasiData->jenisPrestasi,
+                        'namaPrestasi' => $prestasiData->namaPrestasi,
+                        'tingkatPrestasi' => $prestasiData->tingkatPrestasi,
+                        'penyelenggara' => $prestasiData->penyelenggara,
+                        'sertifikat' => $sertifikat,
+                        'guidebook' => $guidebookPath ?? null,
+                    ]);
+                }
+
+                return Inertia::render("DetailPendaftaran", [
+                    'user_id' => $user->id,
+                    'name' => $studentData->name,
+                    'birthplace' => $studentData->birthplace,
+                    'birthdate' => $studentData->birthdate,
+                    'address' => $studentData->address,
+                    'phone' => $studentData->phone,
+                    'email' => $studentData->email,
+                    'parent' => $studentData->parent,
+                    'parentjob' => $studentData->parentjob,
+                    'quran' => $studentData->quran,
+                    'pendapatan' => $studentData->pendapatan,
+                    'guidebook' => $guidebookPath ?? null,
+                ]);
+            }
+
+            return Inertia::render("DetailPendaftaran", [
+                'user_id' => $user->id,
+                'role' => $user->role,
+                'guidebook' => $guidebookPath ?? null,
+            ]);
+
+            // return Inertia::render("Dashboard");
+        }
+
+        return redirect('/')->with('failed', "daftar dulu yaa");
+    }
+
 }

@@ -35,6 +35,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/pengumuman', [DashboardController::class, 'pengumuman'])->name('pengumuman');
     Route::get('/jadwal', [DashboardController::class, 'jadwal'])->name('jadwal');
+    Route::get('/cetak', [DashboardController::class, 'detail_cetak'])->name('cetak');
 });
 
 
