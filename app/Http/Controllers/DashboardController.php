@@ -6,11 +6,13 @@ use App\Http\Resources\StudentResource;
 use App\Models\Prestasi;
 use App\Models\Student;
 use App\Models\User;
+use App\Models\guidebook;
 use Illuminate\Support\Facades\Auth;
 
 
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use App\Http\Controllers\Controller;
 
 class DashboardController extends Controller
 {
@@ -19,11 +21,17 @@ class DashboardController extends Controller
 
             $user = Auth::user();
             $studentData = Student::where('user_id', $user->id)->first();
+            $guidebookData = guidebook::first();
             // $prestasiId = $studentData->prestasi_id;
             // $prestasiData = Prestasi::where('id', $prestasiId)->first(); 
+            
+            if ($guidebookData) {
+            $guidebookPath = asset('storage/'.$guidebookData->guidebook);
+            };
 
             if($studentData) {
 
+                $guidebookData = guidebook::first();
                 $prestasiId = $studentData->prestasi_id;
                 $prestasiData = Prestasi::where('id', $prestasiId)->first();
 
@@ -51,6 +59,7 @@ class DashboardController extends Controller
                     'tingkatPrestasi' => $prestasiData->tingkatPrestasi,
                     'penyelenggara' => $prestasiData->penyelenggara,
                     'sertifikat' => $sertifikat,
+                    'guidebook' => $guidebookPath ?? null,
                     ]);
                 }
 
@@ -66,12 +75,14 @@ class DashboardController extends Controller
                     'parentjob' => $studentData->parentjob,
                     'quran' => $studentData->quran,
                     'pendapatan' => $studentData->pendapatan,
+                    'guidebook' => $guidebookPath ?? null,
                 ]);
             }
 
             return Inertia::render("Dashboard", [
                 'user_id' => $user->id,
                 'role' => $user->role,
+                'guidebook' => $guidebookPath ?? null,
             ]);
 
             // return Inertia::render("Dashboard");

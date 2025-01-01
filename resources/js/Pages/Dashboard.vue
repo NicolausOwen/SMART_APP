@@ -1,6 +1,6 @@
 <script setup>
 import DashboardLayout from '@/Layouts/DashboardLayout.vue';
-import { Link, usePage } from '@inertiajs/vue3';
+import { Link, usePage, useForm } from '@inertiajs/vue3';
 import { computed, ref, onMounted } from 'vue';
 
 const page = usePage();
@@ -26,57 +26,23 @@ const props = defineProps({
     tingkatPrestasi: String,
     penyelenggara: String,
     sertifikat: String,
+    guidebook: String,
 });
 
-
-// Panduan
-const currentGuide = ref(''); // Nama file panduan saat ini
-const selectedFile = ref(null); // File yang dipilih
-
-const fetchCurrentGuide = async () => {
-    try {
-        const response = await fetch('/api/current-guide-url'); // Gantikan dengan URL API Anda
-        const data = await response.json();
-        currentGuide.value = data.guide;
-    } catch (error) {
-        console.error('Error fetching current guide:', error);
-    }
-};
-
-const handleFileChange = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-        selectedFile.value = file;
-    }
-};
-
-const uploadPanduan = async () => {
-    if (!selectedFile.value) {
-        alert('Silakan pilih file terlebih dahulu.');
-        return;
-    }
-
-    const formData = new FormData();
-    formData.append('panduan', selectedFile.value);
-
-    try {
-        const response = await fetch('/api/upload-guide', {
-            method: 'POST',
-            body: formData,
-        });
-        const data = await response.json();
-        alert('Panduan berhasil diperbarui.');
-        currentGuide.value = data.guide; // Update nama file panduan saat ini
-        selectedFile.value = null; // Reset file input
-    } catch (error) {
-        console.error('Error uploading guide:', error);
-        alert('Terjadi kesalahan saat mengunggah panduan.');
-    }
-};
-
-onMounted(() => {
-    fetchCurrentGuide();
+const form = useForm({
+    guidebook: null,
 });
+
+const handleFile = (event) => {
+    form.guidebook = event.target.files[0];
+};
+
+const submitForm = () => {
+    form.post(route('panduan.upload'), {
+        preserveScroll: true,
+    });
+};
+
 </script>
 
 <template>
@@ -117,19 +83,21 @@ onMounted(() => {
                     <label class="text-lg font-semibold mb-4">Panduan Sekarang:</label>
 
                     <!-- Tampilkan panduan saat ini -->
-                    <div v-if="currentGuide" class="mb-4 w-full">
-                        <a :href="`/storage/panduan/${currentGuide}`" class="mt-2 text-blue-500 underline"
+                    <div v-if="props.guidebook === null" class="mb-4 text-gray-500">Panduan saat ini tidak tersedia.</div>
+                    <div v-else class="mb-4 w-full">
+                        <a :href="guidebook" class="mt-2 text-blue-500 underline"
                             download>Download Panduan Saat Ini</a>
                     </div>
-                    <div v-else class="mb-4 text-gray-500">Panduan saat ini tidak tersedia.</div>
-
-                    <div class="input-group mt-4 w-full">
-                        <label for="panduan" class="block text-sm font-medium text-gray-700">Ganti Panduan baru:</label>
-                        <input type="file" id="panduan" @change="handleFileChange"
-                            class="mt-2 p-2 border rounded w-full">
-                        <button @click="uploadPanduan" class="mt-2 p-2 bg-blue-500 text-white rounded">Upload
-                            Panduan</button>
-                    </div>
+                    
+                    <form @submit.prevent="submitForm" enctype="multipart/form-data"> 
+                        <div class="input-group mt-4 w-full">
+                            <label for="panduan" class="block text-sm font-medium text-gray-700">Ganti Panduan baru:</label>
+                            <input type="file" ref="guidebook" id="panduan" @change="handleFile"
+                                class="mt-2 p-2 border rounded w-full">
+                            <button type="submit" class="mt-2 p-2 bg-blue-500 text-white rounded">Upload
+                                Panduan</button>
+                        </div>
+                    </form>
                 </div>
             </div>
 
@@ -154,9 +122,9 @@ onMounted(() => {
                 </Link>
             </div> -->
             <div class="flex items-center justify-center h-24 rounded bg-teal-500 dark:bg-gray-800">
-                <Link href="#" class="text-2xl text-white dark:text-gray-500">
+                <a :href="guidebook" download class="text-2xl text-white dark:text-gray-500">
                 Download Panduan
-                </Link>
+                </a>
             </div>
         </div>
     </div>

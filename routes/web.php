@@ -63,8 +63,8 @@ Route::middleware(['auth', 'verified', Admin::class])
     ->group(function () {
 
         Route::resource('students', AdminController::class);
-
         Route::get('/admin', 'index')->name('admin');
+        Route::post('/dashboard', 'panduan')->name('panduan.upload');
     });
 
 require __DIR__ . '/auth.php';

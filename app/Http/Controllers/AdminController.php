@@ -6,6 +6,7 @@ use App\Http\Resources\ClassesResource;
 use App\Http\Resources\StudentResource;
 use App\Models\Student;
 use App\Models\Classes;
+use App\Models\guidebook;
 
 use App\Http\Requests\StoreStudentRequest;
 use App\Http\Requests\UpdateStudentRequest;
@@ -80,4 +81,45 @@ class AdminController extends Controller
 
         return redirect()->route('students.index');
     }
+
+    public function panduan(Request $request){
+
+        $check = guidebook::exists() ? 'not null' : 'null';
+
+        $request->validate([
+            'guidebook' => 'required|file|mimes:pdf,doc,docx',
+        ]);
+    
+        
+        $file = $request->file('guidebook');
+        $destinationPath = public_path('storage/guidebooks');
+        $fileName = $file->getClientOriginalName();
+    
+        
+        if (!file_exists($destinationPath)) {
+            mkdir($destinationPath, 0777, true);
+        }
+    
+        
+        $file->move($destinationPath, $fileName);
+    
+        if ($check === 'not null') {
+            
+            $firstGuidebook = guidebook::first();
+            $firstGuidebook->update([
+                'guidebook' => "guidebooks/{$fileName}",
+            ]);
+    
+            return redirect()->back()->with('success', 'Guidebook updated successfully!');
+        } else {
+           
+            guidebook::create([
+                'guidebook' => "guidebooks/{$fileName}",
+            ]);
+    
+            return redirect()->back()->with('success', 'Guidebook uploaded successfully!');
+        }
+
+    }
+    
 }
