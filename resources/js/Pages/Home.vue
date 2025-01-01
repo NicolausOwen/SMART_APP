@@ -5,7 +5,7 @@ import HomeLayout from "@/Layouts/HomeLayout.vue";
 
 import siap from '@@/assets/picture/siapppdb.jpg';  // Gambar untuk card
 import pesawat from '@@/assets/picture/pesawat.png';  // Gambar pesawat
-import tabletImage from '@@/assets/picture/data.svg'; // Gambar untuk mockup
+import tabletImage from '@@/assets/picture/data.png'; // Gambar untuk mockup
 import bingung from '@@/assets/picture/orang.svg'; // Gambar untuk orang
 
 
