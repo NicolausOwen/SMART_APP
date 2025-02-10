@@ -8,7 +8,7 @@ use App\Models\Student;
 use App\Models\User;
 use App\Models\guidebook;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\Storage;
 
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -38,7 +38,7 @@ class DashboardController extends Controller
                 $prestasiData = Prestasi::where('id', $prestasiId)->first();
 
                 if ($prestasiData) {
-                    $sertifikat = asset('storage/' . $prestasiData->sertifikat);
+                    $sertifikat = url($prestasiData->sertifikat);
                 } else {
                     $sertifikat = null;
                 }

@@ -15,7 +15,8 @@ defineOptions({ layout: DashboardLayout });
 
 // Define properties
 const props = defineProps({
-  user_id: String,
+  id: Number,
+  user_id: Number,
   name: String,
   birthplace: String,
   birthdate: String,

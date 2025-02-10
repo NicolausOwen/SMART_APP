@@ -23,7 +23,6 @@ onMounted(() => {
 const props = defineProps({
   user_id: Number,
   id: { type: Number, default: null },
-
   name: String,
   birthplace: String,
   birthdate: String,
@@ -132,7 +131,7 @@ defineOptions({ layout: DashboardLayout })
 
           <!-- Tempat/Tanggal Lahir & Kota -->
           <div class="grid grid-cols-3 items-center gap-4">
-            <label for="tanggal-lahir" class="col-span-1 text-sm font-medium text-gray-900 dark:text-white">
+            <label for="kota" class="col-span-1 text-sm font-medium text-gray-900 dark:text-white">
               Tempat/Tanggal Lahir
             </label>
             <div class="col-span-2 grid grid-cols-2 gap-4">
@@ -176,7 +175,7 @@ defineOptions({ layout: DashboardLayout })
           <!-- Email -->
           <div class="grid grid-cols-3 items-center">
             <label for="email" class="col-span-1 text-sm font-medium text-gray-900 dark:text-white">Email</label>
-            <input v-model="form.email" type="email" id="email" placeholder="name@gmail.com"
+            <input autocomplete="on" v-model="form.email" type="email" id="email" placeholder="name@gmail.com"
               class="col-span-2 block w-full p-2 text-gray-900 border border-customOrange rounded-lg bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
           </div>
 

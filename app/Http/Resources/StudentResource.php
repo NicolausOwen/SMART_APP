@@ -43,6 +43,13 @@ class StudentResource extends JsonResource
                 $this->tes_iq < 60
             ) {
                 $status = 'Tidak Memenuhi';
+                $score_akhir = round(
+                    ($this->score_quran * $weights['quran']) +
+                        ($this->score_pendapatan * $weights['pendapatan']) +
+                        ($this->score_prestasi * $weights['prestasi']) +
+                        ($this->tes_masuk * $weights['tes_masuk']) +
+                        ($this->tes_iq * $weights['tes_iq'])
+                    );
             } else {
                 $score_akhir = round(
                 ($this->score_quran * $weights['quran']) +

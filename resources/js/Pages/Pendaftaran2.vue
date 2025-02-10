@@ -8,7 +8,7 @@ import { useForm } from '@inertiajs/vue3';
 import { watch } from 'vue';
 
 const props = defineProps({
-  score: BigInt,
+  score: Number,
 });
 
 // Define form data using useForm
@@ -62,12 +62,13 @@ defineOptions({ layout: DashboardLayout })
 </script>
 
 <template>
-  <div class="min-h-screen bg-cover bg-center flex items-center justify-center px-4"
-    :style="{ backgroundImage: `url(${latar})` }">
+  <div 
+  class="min-h-screen bg-cover bg-center flex items-center justify-center px-4"
+  :style="{ backgroundImage: `url('${latar}')` }">
     <div class="login-box">
       <!-- Ikon PNG di atas tengah box -->
       <div class="text-center">
-        <img :src="logo" alt="Logo" class="w-20 xs:w-16 sm:w-24 mx-auto mb-4">
+        <img :src=logo alt="Logo" class="w-20 xs:w-16 sm:w-24 mx-auto mb-4">
         <h1 class="text-xl xs:text-lg sm:text-2xl font-semibold text-gray-900 mb-6">Form Pendaftaran</h1>
       </div>
       <!-- Judul kriteria penerimaan -->
@@ -85,7 +86,7 @@ defineOptions({ layout: DashboardLayout })
             {{ option.label }}
           </label>
         </div>
-        <h3>Score : {{ score }}</h3>
+        
         <!-- Tombol Kembali dan Submit -->
         <div class="flex justify-end gap-4 mt-4">
           <button type="button" @click="goBack" class="py-2 px-4 text-white bg-gray-600 hover:bg-gray-700 rounded">

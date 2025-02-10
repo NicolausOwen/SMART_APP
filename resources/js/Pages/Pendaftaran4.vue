@@ -9,7 +9,7 @@ import { useForm } from '@inertiajs/vue3';
 import { watch } from 'vue';
 
 const props = defineProps({
-  score: BigInt,
+  score: Number,
 });
 
 // Initializing the form using useForm
@@ -85,7 +85,7 @@ defineOptions({ layout: DashboardLayout })
             {{ option.label }}
           </label>
         </div>
-        <h3>Score : {{ score }}</h3>
+
         <!-- Tombol Kembali dan Submit -->
         <div class="flex justify-end gap-4 mt-4">
           <button @click="goBack" class="py-2 px-4 text-white bg-gray-600 hover:bg-gray-700 rounded">

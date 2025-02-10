@@ -57,7 +57,11 @@ class PrestasiController extends Controller
         // Handle file upload
         $sertifikat = null;
         if ($request->hasFile('sertifikat')) {
-            $sertifikat = $request->file('sertifikat')->move(public_path('storage/prestasi_sertifikat'), $request->file('sertifikat')->getClientOriginalName());
+            $file = $request->file('sertifikat');
+        $filename = time() . '_' . $file->getClientOriginalName(); 
+        $filePath = 'prestasi_sertifikat/' . $filename; 
+        $file->move(public_path('prestasi_sertifikat'), $filename);
+        $sertifikat = $filePath;
         }
 
 

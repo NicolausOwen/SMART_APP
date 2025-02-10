@@ -109,7 +109,7 @@ defineOptions({ layout: DashboardLayout })
         <!-- Nama Prestasi -->
         <div>
           <label for="nama-prestasi" class="block mb-2 text-sm font-medium text-gray-700">Nama Prestasi</label>
-          <input type="text" v-model="form.namaPrestasi" placeholder="Masukkan Nama Prestasi yang Diikuti"
+          <input autocomplete="on" id="nama-prestasi" type="text" v-model="form.namaPrestasi" placeholder="Masukkan Nama Prestasi yang Diikuti"
             class="w-full border border-orange-400 text-gray-700 text-sm rounded focus:ring-orange-500 focus:border-orange-500 p-2.5"
             :disabled="!form.jenisPrestasi" />
         </div>
@@ -117,7 +117,7 @@ defineOptions({ layout: DashboardLayout })
         <!-- Tingkat Prestasi -->
         <div>
           <label for="tingkat-prestasi" class="block mb-2 text-sm font-medium text-gray-700">Tingkat Prestasi</label>
-          <select v-model="form.tingkatPrestasi"
+          <select autocomplete="on" id="tingkat-prestasi" v-model="form.tingkatPrestasi"
             class="w-full h-10 border border-orange-400 text-gray-700 text-sm rounded bg-white appearance-none focus:ring-orange-500 focus:border-orange-500 p-2.5"
             :disabled="!form.jenisPrestasi">
             <option value="" disabled selected>-</option>
@@ -132,7 +132,7 @@ defineOptions({ layout: DashboardLayout })
         <!-- Penyelenggara -->
         <div>
           <label for="penyelenggara" class="block mb-2 text-sm font-medium text-gray-700">Penyelenggara</label>
-          <input type="text" v-model="form.penyelenggara" placeholder="Masukkan Nama Penyelenggara"
+          <input autocomplete="on" id="penyelenggara" type="text" v-model="form.penyelenggara" placeholder="Masukkan Nama Penyelenggara"
             class="w-full border border-orange-400 text-gray-700 text-sm rounded focus:ring-orange-500 focus:border-orange-500 p-2.5"
             :disabled="!form.jenisPrestasi" />
         </div>
@@ -140,7 +140,7 @@ defineOptions({ layout: DashboardLayout })
         <!-- Sertifikat Prestasi -->
         <div>
           <label for="sertifikat" class="block mb-2 text-sm font-medium text-gray-700">Sertifikat Prestasi</label>
-          <input type="file" @change="form.sertifikat = $event.target.files[0]" accept=".pdf,.png,.jpeg,.jpg"
+          <input id="sertifikat" type="file" @change="form.sertifikat = $event.target.files[0]" accept=".pdf,.png,.jpeg,.jpg"
             class="w-full border border-orange-400 text-gray-700 text-sm rounded focus:ring-orange-500 focus:border-orange-500 p-2.5 bg-white cursor-pointer"
             :disabled="!form.jenisPrestasi" />
           <a class="block mt-2 text-xs font-normal text-gray-500">Upload File dalam Bentuk PDF, PNG, JPEG/JPG</a>
