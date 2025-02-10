@@ -71,7 +71,7 @@ defineOptions({ layout: DashboardLayout })
 
 <template>
   <div class="min-h-screen bg-cover bg-center flex items-center justify-center px-4"
-    :style="{ backgroundImage: `url('${latar}')` }">
+    :style="{ backgroundImage: `url(${latar})` }">
     <!-- Framer -->
     <div class="login-box">
 
