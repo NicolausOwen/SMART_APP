@@ -632,7 +632,7 @@ const submit = () => {
                                         <InputError class="mt-2" :message="form.errors.score_pendapatan" />
                                     </div>
 
-                                    <!-- <div class="col-span-5 sm:col-span-1">
+                                    <div class="col-span-5 sm:col-span-1">
                                         <label for="status" class="block text-sm font-medium text-gray-700">
                                             Status
                                         </label>
@@ -641,11 +641,12 @@ const submit = () => {
                                             :class="{
                                                 'text-red-900 focus:ring-red-500 focus:border-red-500 border-red-300': form.errors.status,
                                             }">
+                                            <option value="Belum diterima">Belum diterima</option>
                                             <option value="lulus">lulus</option>
                                             <option value="gagal">gagal</option>
                                         </select>
                                         <InputError class="mt-2" :message="form.errors.status" />
-                                    </div> -->
+                                    </div>
                                 </div>
                             </div>
 

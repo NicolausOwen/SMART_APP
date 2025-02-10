@@ -28,7 +28,6 @@ class Student extends Model
         'score_quran',
         'score_pendapatan',
         'score_prestasi',
-        'score_akhir',
         'status'
      ];
 

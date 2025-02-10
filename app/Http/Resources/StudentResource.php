@@ -23,9 +23,6 @@ class StudentResource extends JsonResource
             'tes_iq' => 0.10,
         ];
 
-        $score_akhir = null;
-        $kriteria = null;
-
         // Check if any score is null
         if (
             is_null($this->score_quran) ||
@@ -35,7 +32,7 @@ class StudentResource extends JsonResource
             is_null($this->tes_iq)
         ) {
             $score_akhir = 'Belum Lengkap';
-            $kriteria = 'Belum Lengkap';
+            $status = 'Belum Lengkap';
         } else {
             // Check if any score is below 60
             if (
@@ -45,7 +42,7 @@ class StudentResource extends JsonResource
                 $this->tes_masuk < 60 ||
                 $this->tes_iq < 60
             ) {
-                $kriteria = 'Tidak Memenuhi';
+                $status = 'Tidak Memenuhi';
             } else {
                 $score_akhir = round(
                 ($this->score_quran * $weights['quran']) +
@@ -56,14 +53,12 @@ class StudentResource extends JsonResource
                 );
 
                 if ($score_akhir >= 60) {
-                    $kriteria = 'Memenuhi Kriteria';
+                    $status = 'Memenuhi Kriteria';
                 } else {
-                    $kriteria = 'Tidak Memenuhi';
+                    $status = 'Tidak Memenuhi';
                 }
             }
         }
-
-        $finalStatus = ($kriteria === 'Memenuhi Kriteria') ? 'Lulus' : $this->status;
 
         // Mengembalikan data siswa
         return [
@@ -87,9 +82,9 @@ class StudentResource extends JsonResource
             'score_quran' => $this->score_quran,
             'score_pendapatan' => $this->score_pendapatan,
             'score_prestasi' => $this->score_prestasi,
-            'score_akhir' => $score_akhir, 
-            'kriteria'=> $kriteria,
-            'status' => $finalStatus,
+            'score_akhir' => $score_akhir, // Membulatkan hasil ke 2 desimal
+            'kriteria'=> $status,
+            'status' => $this->status,
         ];
     }
 }

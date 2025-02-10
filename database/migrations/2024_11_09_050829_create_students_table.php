@@ -37,8 +37,7 @@ return new class extends Migration
             $table->bigInteger('tes_masuk')->nullable()->default(0);
             $table->bigInteger('score_quran')->nullable()->default(0);
             $table->bigInteger('score_pendapatan')->nullable()->default(0);
-            $table->bigInteger('score_prestasi')->nullable()->default(0);
-            $table->string('status')->nullable();
+            $table->bigInteger('tes_prestasi')->nullable()->default(0);
 
 
             $table->boolean('has_submitted')->default(false);   
