@@ -1,0 +1,13 @@
+{
+    "build": {
+      "env": {
+        "COMPOSER_ALLOW_SUPERUSER": "1"
+      },
+      "commands": [
+        "composer install --no-dev --prefer-dist --optimize-autoloader",
+        "php artisan ziggy:generate",
+        "npm run build"
+      ]
+    }
+  }
+  
