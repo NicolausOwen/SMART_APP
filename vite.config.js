@@ -20,6 +20,11 @@ export default defineConfig({
         }),
         
     ],
+
+    build: {
+        outDir: 'dist',
+      },
+
     resolve: {
         alias: {
           '@@': fileURLToPath(new URL('./public', import.meta.url))
