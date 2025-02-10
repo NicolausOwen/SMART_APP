@@ -105,7 +105,7 @@ defineOptions({ layout: DashboardLayout })
   <Head title="Biodata" />
 
   <div class="min-h-screen bg-cover bg-center flex items-center justify-center px-4"
-    :style="{ backgroundImage: `url(${latar})` }">
+    :style="{ backgroundImage: `url('${latar}')` }">
     <!-- Box putih -->
     <div
       class="OrangeBorder bg-white shadow-lg rounded-[35px] mt-16 mb-5 p-8 w-full xs:max-w-[320px] sm:max-w-[420px] md:max-w-[620px] lg:max-w-[900px]">

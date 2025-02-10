@@ -65,7 +65,7 @@ defineOptions({ layout: DashboardLayout })
 <template>
   <form @submit.prevent="submitChoice">
     <div class="min-h-screen bg-cover bg-center flex items-center justify-center px-4"
-      :style="{ backgroundImage: `url(${latar})` }">
+      :style="{ backgroundImage: `url('${latar}')` }">
       <div class="login-box">
         <!-- Ikon PNG di atas tengah box -->
         <div class="text-center">
@@ -205,4 +205,3 @@ button:disabled {
   /* Warna teks abu-abu saat disabled */
 }
 </style>
-``
